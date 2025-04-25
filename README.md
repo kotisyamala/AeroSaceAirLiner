@@ -1,4 +1,4 @@
-# AeroSaceAirLiner
+# AeroSpaceAirLiner
 Cordova Mobile APP
 
 ## Issue-1: cordova build android
