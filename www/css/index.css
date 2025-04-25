@@ -1,110 +1,190 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-* {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
-}
-
+/* Base Styles - Adjust as needed for AeroSpace theme */
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(to bottom, #A7A7A7 0%, #E4E4E4 51%);
+    -webkit-touch-callout: none; /* Disable callout */
+    -webkit-text-size-adjust: none; /* Disable text size adjustment */
+    -webkit-user-select: none; /* Disable user selection */
+    background-color: #1a2a3a; /* Dark blue/grey */
+    color: #ffffff; /* White text */
     font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
-    font-size:12px;
-    height:100vh;
-    margin:0px;
-    padding:0px;
-    /* Padding to avoid the "unsafe" areas behind notches in the screen */
-    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
-    text-transform:uppercase;
-    width:100%;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    /* Optional: Disable overscroll glow on some platforms */
+    /* overscroll-behavior: none; */
 }
 
-/* Portrait layout (default) */
 .app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:50%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    overflow-y: auto; /* Allow scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-        background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
-    }
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-h1 {
-    font-size:24px;
-    font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
-    text-align:center;
+header h1 {
+    font-size: 2em;
+    margin-bottom: 0;
+    color: #00aaff; /* Bright blue accent */
 }
 
-.event {
-    border-radius:4px;
-    color:#FFFFFF;
-    font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+header p {
+    margin-top: 5px;
+    font-size: 1em;
+    color: #cccccc;
 }
 
-.event.listening {
-    background-color:#333333;
-    display:block;
+/* In-App Notification Styles */
+.in-app-notification {
+    background-color: rgba(0, 170, 255, 0.9); /* Semi-transparent bright blue */
+    color: #ffffff;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    width: 90%; /* Adjust width as needed */
+    max-width: 500px; /* Max width for larger screens */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
-.event.received {
-    background-color:#4B946A;
-    display:none;
+.in-app-notification.hidden {
+    opacity: 0;
+    height: 0;
+    padding: 0 15px; /* Maintain padding width */
+    overflow: hidden;
+    margin-bottom: 0;
 }
 
-#deviceready.ready .event.listening { display: none; }
-#deviceready.ready .event.received { display: block; }
-
-@keyframes fade {
-    from { opacity: 1.0; }
-    50% { opacity: 0.4; }
-    to { opacity: 1.0; }
+#in-app-notification-message {
+    flex-grow: 1;
+    margin-right: 10px;
+    font-size: 1.1em;
 }
 
-.blink {
-    animation:fade 3000ms infinite;
-    -webkit-animation:fade 3000ms infinite;
+#in-app-close-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0 5px;
+}
+
+#in-app-close-button:active {
+    color: #eeeeee;
 }
 
 
-@media screen and (prefers-color-scheme: dark) {
-    body {
-        background-image:linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
-    }
+/* Flight Status Styles */
+#flight-status {
+    background-color: #2a3c4c; /* Slightly lighter dark blue */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#flight-status h2 {
+    margin-top: 0;
+    color: #00aaff;
+    border-bottom: 1px solid #445566;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+#flight-status p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+#flight-status span {
+    font-weight: bold;
+    color: #ffffff; /* Keep span text white for contrast */
+}
+
+
+/* Actions/Buttons Styles */
+.actions {
+     margin-bottom: 30px;
+     width: 90%;
+     max-width: 500px;
+}
+
+.actions h3 {
+    margin-top: 0;
+    color: #cccccc;
+    margin-bottom: 15px;
+}
+
+.actions button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #00aaff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.actions button:active {
+    background-color: #0077cc; /* Darker blue on press */
+}
+
+/* Notification History Styles */
+#notification-history {
+    width: 90%;
+    max-width: 500px;
+}
+
+#notification-history h3 {
+    margin-top: 0;
+    color: #cccccc;
+    margin-bottom: 15px;
+}
+
+#history-list {
+    list-style: none;
+    padding: 0;
+}
+
+#history-list li {
+    background-color: #2a3c4c;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-size: 1em;
+    border-left: 4px solid #00aaff;
+}
+
+/* Status specific styling (Optional) */
+#status-text[data-status="delayed"] {
+    color: #ff4444; /* Red */
+}
+
+#status-text[data-status="on-time"] {
+    color: #44ff44; /* Green */
+}
+
+#status-text[data-status="boarding"] {
+     color: #ffff44; /* Yellow */
 }
